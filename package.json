@@ -1,0 +1,9 @@
+{
+  "name": "yata",
+  "version": "1.0.0",
+  "description": "Yet Another ToDo App",
+  "main": "index.js",
+  "author": "Carolina Branquinho",
+  "license": "MIT",
+  "private": true
+}
