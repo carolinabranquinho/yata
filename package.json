@@ -5,5 +5,8 @@
   "main": "index.js",
   "author": "Carolina Branquinho",
   "license": "MIT",
-  "private": true
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
 }
