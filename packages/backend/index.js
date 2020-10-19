@@ -1,45 +1,49 @@
-const Express = require("express");
+const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const Schema = mongoose.Schema;
+require("dotenv").config();
+
 const PORT = process.env.PORT || 8008;
-var app = Express();
-app.use(Express.json());
+
+const app = express();
+
+// middlewares
+app.use(express.json());
 app.use(cors());
 
+// connect db
 mongoose.connect(
   process.env.DB_URL,
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   },
-  () => console.info("Connected to the db")
+  () => console.info("Connected to the DB!")
 );
 
-const UserSchema = new Schema({
+// Schemas and Models
+const UserSchema = new mongoose.Schema({
   name: String,
   tasks: [
     {
-      type: Schema.Types.ObjectId,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Task",
     },
   ],
 });
-
 const UserModel = mongoose.model("User", UserSchema);
 
-const TaskSchema = new Schema({
+const TaskSchema = new mongoose.Schema({
   description: String,
   state: String,
   user: {
-    type: Schema.Types.ObjectId,
+    type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
 });
-
 const TasksModel = mongoose.model("Task", TaskSchema);
 
-//users
+// routes
 // GET /users
 app.get("/users", async (request, response) => {
   const users = await UserModel.find();
@@ -53,22 +57,21 @@ app.post("/users", async (request, response) => {
   response.json({ ...savedUser._doc, id: savedUser._id });
 });
 
-//PATCH /users/:id
+// PATCH /users/:id
 app.patch("/users/:id", async (request, response) => {
   const id = request.params.id;
   const updatedUser = await UserModel.update({ _id: id }, request.body);
   response.json({ ...updatedUser._doc, id: updatedUser._id });
 });
 
-// Delete /users/:id
+// DELETE /users/:id
 app.delete("/users/:id", async (request, response) => {
   const id = request.params.id;
   await UserModel.deleteOne({ _id: id });
   response.sendStatus(200);
 });
 
-//tasks
-
+// POST /users/:id/tasks
 app.post("/users/:id/tasks", async (request, response) => {
   const id = request.params.id;
   const task = await TasksModel.create({
@@ -106,6 +109,7 @@ app.delete("/users/:id/tasks/:taskId", async (request, response) => {
   response.sendStatus(200);
 });
 
+// Start server
 app.listen(PORT, () => {
   console.info(`Listening at :${PORT}`);
 });

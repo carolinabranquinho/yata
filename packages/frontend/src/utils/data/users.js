@@ -1,4 +1,4 @@
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8008";
+const API_URL = process.env.REACT_APP_API_URL;
 
 export async function listUsers() {
   return fetch(`${API_URL}/users`).then((response) => response.json());
