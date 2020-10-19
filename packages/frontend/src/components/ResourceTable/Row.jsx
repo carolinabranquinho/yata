@@ -29,7 +29,7 @@ const ResourceTableRow = ({
           onUpdate(editedResource);
         }}
       />
-      <td>
+      <td className="actions">
         <button
           className="update"
           onClick={() => {
