@@ -11,7 +11,7 @@ import Loading from "../../components/Loading";
 import { useParams } from "react-router-dom";
 import TasksTable from "../../components/ResourceTable";
 
-function useTaskList(id) {
+function useTasksList(id) {
   const [loading, setLoading] = useState(true);
   const [loadedTasks, setLoadedTasks] = useState([]);
 
@@ -20,14 +20,14 @@ function useTaskList(id) {
       setLoadedTasks(responseTasks);
       setLoading(false);
     });
-  }, []);
+  }, [id]);
 
   return { tasks: loadedTasks, loading };
 }
 
 function UsersTasksPage() {
   const { id: userId } = useParams();
-  const { tasks: loadedTasks, loading } = useTaskList(userId);
+  const { tasks: loadedTasks, loading } = useTasksList(userId);
 
   const [tasks, setTasks] = useState([]);
   React.useEffect(() => {
@@ -43,7 +43,7 @@ function UsersTasksPage() {
 
   const editTask = (editedTask) => {
     setTasks(
-      tasks.map((task) => (task.id == editedTask.id ? editedTask : task))
+      tasks.map((task) => (task.id === editedTask.id ? editedTask : task))
     );
     updateUserTask(userId, editedTask);
   };
@@ -60,7 +60,7 @@ function UsersTasksPage() {
   const completeTask = (completedTask) => {
     setTasks(
       tasks.map((task) =>
-        task.id == completedTask.id ? { ...task, state: "done" } : task
+        task.id === completedTask.id ? { ...task, state: "done" } : task
       )
     );
     completeUserTask(userId, completedTask);
@@ -69,7 +69,6 @@ function UsersTasksPage() {
   const completedTasks = tasks.filter((task) => task.state === "done");
   const toDoTasks = tasks.filter((task) => task.state === "to do");
 
-  console.log(tasks, loading);
   return (
     <div className="container">
       {loading ? (

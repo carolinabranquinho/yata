@@ -42,7 +42,6 @@ function UsersPage() {
     const user = users.find((user) => user.id === editedUser.id);
     user.name = editedUser.name;
     updateUser(editedUser);
-    console.log(user);
   };
 
   const addUser = (user) => {
@@ -55,7 +54,6 @@ function UsersPage() {
 
   const getResourceLink = (user) => `/users/${user.id}/tasks`;
 
-  console.log(loading, users);
   return (
     <div className="container">
       <h1>YATA - Users List</h1>

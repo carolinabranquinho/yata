@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import RowForm from "./RowForm";
 
 export default function CreateNewResourceRow({
@@ -27,3 +28,11 @@ export default function CreateNewResourceRow({
     </tr>
   );
 }
+
+CreateNewResourceRow.propTypes = {
+  setCreatedResource: PropTypes.func,
+  setResourceCreating: PropTypes.func,
+  createdResource: PropTypes.shape({ id: PropTypes.string }),
+  onCreate: PropTypes.func,
+  attributes: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string })),
+};

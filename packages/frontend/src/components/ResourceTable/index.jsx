@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 import ResourceTableRow from "./Row";
 import CreateNewResourceRow from "./CreateNewResourceRow";
 
@@ -69,3 +70,13 @@ const Table = (props) => {
 };
 
 export default Table;
+
+Table.propTypes = {
+  resources: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string })),
+  onCreate: PropTypes.func,
+  onUpdate: PropTypes.func,
+  onDelete: PropTypes.func,
+  getResourceLink: PropTypes.func,
+  extraActions: PropTypes.arrayOf(PropTypes.string),
+  attributes: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string })),
+};

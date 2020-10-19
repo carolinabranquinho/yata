@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import RowForm from "./RowForm";
 
 const ResourceTableRow = ({
@@ -64,3 +65,16 @@ const ResourceTableRow = ({
 };
 
 export default ResourceTableRow;
+
+ResourceTableRow.propTypes = {
+  resource: PropTypes.shape({ id: PropTypes.string }),
+  resourceEditing: PropTypes.string,
+  editedResource: PropTypes.shape({ id: PropTypes.string }),
+  setEditedResource: PropTypes.func,
+  setResourceEditing: PropTypes.func,
+  onUpdate: PropTypes.func,
+  onDelete: PropTypes.func,
+  getResourceLink: PropTypes.func,
+  extraActions: PropTypes.arrayOf(PropTypes.string),
+  attributes: PropTypes.arrayOf(PropTypes.shape({ id: PropTypes.string })),
+};

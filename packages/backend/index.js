@@ -13,7 +13,7 @@ mongoose.connect(
     useNewUrlParser: true,
     useUnifiedTopology: true,
   },
-  () => console.log("CONNECTED")
+  () => console.info("Connected to the db")
 );
 
 const UserSchema = new Schema({
@@ -42,9 +42,7 @@ const TasksModel = mongoose.model("Task", TaskSchema);
 //users
 // GET /users
 app.get("/users", async (request, response) => {
-  console.log("finding users");
   const users = await UserModel.find();
-  console.log({ users });
   response.json(users.map((user) => ({ ...user._doc, id: user._id })));
 });
 
@@ -90,7 +88,6 @@ app.post("/users/:id/tasks", async (request, response) => {
 app.get("/users/:id/tasks", async (request, response) => {
   const id = request.params.id;
   const user = await UserModel.findOne({ _id: id }).populate("tasks");
-  console.log(user);
   response.json(user.tasks.map((task) => ({ ...task._doc, id: task._id })));
 });
 
@@ -110,5 +107,5 @@ app.delete("/users/:id/tasks/:taskId", async (request, response) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Listening at :${PORT}`);
+  console.info(`Listening at :${PORT}`);
 });
