@@ -8,13 +8,5 @@
   "private": true,
   "workspaces": [
     "packages/*"
-  ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn workspaces run precommit"
-    }
-  },
-  "devDependencies": {
-    "husky": "^4.3.0"
-  }
+  ]
 }

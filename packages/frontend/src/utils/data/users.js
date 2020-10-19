@@ -1,30 +1,4 @@
-let users = [
-  {
-    id: 1,
-    name: "Tania",
-    tasks: [
-      { id: 1, description: "test", state: "done" },
-      { id: 2, description: "study", state: "to do" },
-      { id: 3, description: "bla", state: "to do" },
-    ],
-  },
-  {
-    id: 2,
-    name: "Craig",
-    tasks: [{ id: 1, description: "bla", state: "to do" }],
-  },
-  {
-    id: 3,
-    name: "Ben",
-    tasks: [
-      { id: 1, description: "test", state: "to do" },
-      { id: 2, description: "study bla", state: "to do" },
-      { id: 3, description: "blabla", state: "to do" },
-    ],
-  },
-];
-
-const API_URL = "http://localhost:8008";
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8008";
 
 export async function listUsers() {
   return fetch(`${API_URL}/users`).then((response) => response.json());

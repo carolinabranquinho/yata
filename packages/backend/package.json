@@ -12,6 +12,7 @@
     "mongoose": "^5.10.9"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "echo 'No tests yet!'"
   }
 }
