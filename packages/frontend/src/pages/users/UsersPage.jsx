@@ -48,7 +48,9 @@ function UsersPage() {
   const addUser = (user) => {
     const id = users.length + 1;
     setUsers([...users, { id, ...user }]);
-    createUser(user);
+    createUser(user).then((createdUser) => {
+      setUsers([...users, createdUser]);
+    });
   };
 
   const getResourceLink = (user) => `/users/${user.id}/tasks`;

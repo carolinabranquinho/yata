@@ -52,7 +52,9 @@ function UsersTasksPage() {
     const id = tasks.length + 1;
     const newTask = { id, ...task, state: "to do" };
     setTasks([...tasks, newTask]);
-    createUserTask(userId, task);
+    createUserTask(userId, task).then((createdTask) => {
+      setTasks([...tasks, createdTask]);
+    });
   };
 
   const completeTask = (completedTask) => {
